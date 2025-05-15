@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Signature Verification System</title>
+</head>
+<body>
+    <header>
+        
+        <img src="https://th.bing.com/th?id=OIP.GAf-m0E9nfFQNuctf2JwUwAAAA&w=232&h=268&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"length="100"width="100">
+        <h1>DR. T. THIMMAIAH INSTITUTE OF TECHNOLOGY</h1>
+        <h3>Accredited by NBA & NAAC with 'A' Grade</h3>
+        <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">ABOUT</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Academics</button>
+            </li>
+          </ul>
+    </header>
+    <h1>Signature Verification System</h1>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Signature Verification System</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Digital Signature Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Highlight effect for demo section */
+        .highlight {
+            animation: highlight 1s ease;
+        }
+        @keyframes highlight {
+            0% { background-color: transparent; }
+            50% { background-color: rgba(59, 130, 246, 0.2); }
+            100% { background-color: transparent; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">SignatureVerify</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#home" class="hover:underline">Home</a></li>
+                    <li><a href="#features" class="hover:underline">Features</a></li>
+                    <li><a href="#about" class="hover:underline">About</a></li>
+                    <li><a href="#demo" class="hover:underline">Demo</a></li>
+                    <li><a href="/logout" class="hover:underline">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-blue-50 py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Real-Time Digital Signature Verification</h2>
+            <p class="text-lg mb-6">Secure, fast, and reliable signature verification for your digital documents.</p>
+            <a href="#demo" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Try Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="text-xl font-semibold mb-2">Real-Time Verification</h3>
+                    <p>Instantly verify digital signatures with our advanced algorithms.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="text-xl font-semibold mb-2">High Security</h3>
+                    <p>Ensures your documents are protected with top-tier encryption.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="text-xl font-semibold mb-2">User-Friendly Interface</h3>
+                    <p>Easy-to-use platform for seamless signature verification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-gray-200 py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">About Us</h2>
+            <p class="text-lg text-center max-w-2xl mx-auto">SignatureVerify is a cutting-edge platform designed to provide secure and efficient digital signature verification. Our mission is to ensure trust and authenticity in your digital transactions.</p>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-10">Try Our Demo</h2>
+            <div class="flex flex-col items-center">
+                <!-- Upload and Train Form -->
+                <div class="bg-white p-6 rounded shadow mb-8 w-full max-w-md">
+                    <h3 class="text-xl font-semibold mb-4">Upload Signature for Training</h3>
+                    <form action="/upload_and_train" method="post" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="file" class="block text-sm font-medium text-gray-700">Upload Signature Image</label>
+                            <input type="file" id="file" name="file" accept=".png,.jpg,.jpeg" class="mt-1 block w-full border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label for="signature_type" class="block text-sm font-medium text-gray-700">Signature Type</label>
+                            <select id="signature_type" name="signature_type" class="mt-1 block w-full border-gray-300 rounded-md">
+                                <option value="genuine">Genuine</option>
+                                <option value="forged">Forged</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Upload and Train</button>
+                    </form>
+                    {% if train_result %}
+                        <p class="mt-4 text-green-600">{{ train_result }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Verify Signature Form -->
+                <div class="bg-white p-6 rounded shadow w-full max-w-md">
+                    <h3 class="text-xl font-semibold mb-4">Verify Signature</h3>
+                    <form action="/verify_signature" method="post" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="verify_file" class="block text-sm font-medium text-gray-700">Upload Signature to Verify</label>
+                            <input type="file" id="verify_file" name="file" accept=".png,.jpg,.jpeg" class="mt-1 block w-full border-gray-300 rounded-md">
+                        </div>
+                        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Verify Signature</button>
+                    </form>
+                    {% if result %}
+                        <p class="mt-4 text-lg {% if result == 'Genuine Signature' %}text-green-600{% else %}text-red-600{% endif %}">{{ result }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 SignatureVerify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Highlight the demo section when navigated to
+        document.querySelectorAll('a[href="#demo"]').forEach(anchor => {
+            anchor.addEventListener('click', () => {
+                setTimeout(() => {
+                    document.getElementById('demo').classList.add('highlight');
+                }, 300); // Delay to ensure smooth scroll completes
+            });
+        });
+    </script>
+</body>
+</html>
